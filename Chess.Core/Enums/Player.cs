@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Chess.Core
 {
-    internal class Program
+    public enum Player
     {
-        static void Main(string[] args)
-        {
-        }
+        None,
+        White,
+        Black
     }
 }

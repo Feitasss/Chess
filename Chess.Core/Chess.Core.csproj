@@ -43,23 +43,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bishop.cs" />
-    <Compile Include="Board.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="King.cs" />
-    <Compile Include="Knight.cs" />
-    <Compile Include="Move.cs" />
-    <Compile Include="Pawn.cs" />
-    <Compile Include="Piece.cs" />
-    <Compile Include="Position.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Enums\EndReason.cs" />
+    <Compile Include="Enums\Player.cs" />
+    <Compile Include="Moves\CastlingMove.cs" />
+    <Compile Include="Pieces\Bishop.cs" />
+    <Compile Include="Enums\PieceType.cs" />
+    <Compile Include="Root\Board.cs" />
+    <Compile Include="Root\Game.cs" />
+    <Compile Include="Pieces\King.cs" />
+    <Compile Include="Pieces\Knight.cs" />
+    <Compile Include="Moves\Move.cs" />
+    <Compile Include="Pieces\Pawn.cs" />
+    <Compile Include="Pieces\Piece.cs" />
+    <Compile Include="Root\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queen.cs" />
-    <Compile Include="Rook.cs" />
+    <Compile Include="Pieces\Queen.cs" />
+    <Compile Include="Pieces\Rook.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
