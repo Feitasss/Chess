@@ -9,7 +9,61 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="assets\black_bishop.png" />
+    <None Remove="assets\black_king.png" />
+    <None Remove="assets\black_knight.png" />
+    <None Remove="assets\black_pawn.png" />
+    <None Remove="assets\black_queen.png" />
+    <None Remove="assets\black_rook.png" />
+    <None Remove="assets\white_bishop.png" />
+    <None Remove="assets\white_king.png" />
+    <None Remove="assets\white_knight.png" />
+    <None Remove="assets\white_pawn.png" />
+    <None Remove="assets\white_queen.png" />
+    <None Remove="assets\white_rook.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Chess.Core\Chess.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="assets\black_bishop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\black_king.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\black_knight.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\black_pawn.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\black_queen.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\black_rook.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\white_bishop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\white_king.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\white_knight.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\white_pawn.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\white_queen.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="assets\white_rook.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

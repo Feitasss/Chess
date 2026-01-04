@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chess.Core.Enums
+namespace Chess.Core
 {
     public enum EndReason
     {
