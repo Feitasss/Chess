@@ -25,21 +25,13 @@ namespace Chess.UI
 
         private static ImageSource LoadImage(Player color, PieceType type)
         {
-            //string colorName = color.ToString().ToLower();
-            //string typeName = type.ToString().ToLower();
-
-            // 2. Build the exact filename
-            // Result: "white_pawn.png"
-            string fileName = $"{color}_{type}.png";
-
-            // 3. Load with Pack URI
-            return new BitmapImage(new Uri($"pack://application:,,,/Assets/{fileName}"));
+            return new BitmapImage(new Uri($"pack://application:,,,/Assets/{color}{type}.png"));
         }
 
         public static ImageSource? GetImage(Piece piece)
         {
             if (piece == null) return null;
-            return piece.Color == Player.White ? whiteSources[piece.Type] : blackSources[piece.Type];
+            return (piece.Color == Player.White) ? whiteSources[piece.Type] : blackSources[piece.Type];
         }
     }
 }
