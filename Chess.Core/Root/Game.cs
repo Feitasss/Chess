@@ -21,9 +21,6 @@ namespace Chess.Core
             CurrentPlayer = player;
         }
 
-        // ------------------------------------------------------------------
-        // 1. The Core Interaction (UI calls this)
-        // ------------------------------------------------------------------
         public IEnumerable<Move> GetLegalMovesFor(Position pos)
         {
             if (IsGameOver || Board.IsEmpty(pos) || Board[pos].Color != CurrentPlayer || Board[pos] == null)

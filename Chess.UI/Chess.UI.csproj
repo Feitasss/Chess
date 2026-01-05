@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Assets\WhiteKing.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +34,10 @@
     <None Remove="Assets\white_pawn.png" />
     <None Remove="Assets\white_queen.png" />
     <None Remove="Assets\white_rook.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\WhiteKing.ico" />
   </ItemGroup>
 
   <ItemGroup>

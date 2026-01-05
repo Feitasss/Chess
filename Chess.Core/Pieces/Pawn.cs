@@ -15,7 +15,7 @@ namespace Chess.Core
 
         public Pawn(Player color) 
         { 
-            Player Color = color;
+            Color = color;
             forwardDir = (color == Player.White) ? 1 : -1;
         }
 

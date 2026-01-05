@@ -8,7 +8,8 @@
         <Grid Height="600" Width="600"> 
 
             <UniformGrid Name="BoardGrid" Rows="8" Columns="8" 
-                         Background="#D18B47"/>
+                         Background="#D18B47"
+                         MouseDown="BoardGrid_MouseDown"/>
 
             <UniformGrid Name="HighlightGrid" Rows="8" Columns="8" 
                          IsHitTestVisible="False"/>

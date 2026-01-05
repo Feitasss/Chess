@@ -41,6 +41,7 @@ namespace Chess.Core
 
             if (this.HasMoved) yield break;
 
+            // -- Checking for castling possibility
             Player opponent = (this.Color == Player.White) ? Player.Black : Player.White;
             int[] directions = { 1, -1 };
 
@@ -58,19 +59,19 @@ namespace Chess.Core
                     if (piece == null) continue;
                     if (piece.Type == PieceType.Rook && piece.Color == this.Color && !piece.HasMoved)
                     {
+                        // TODO: should be different check
                         int destCol = (dir == 1) ? 6 : 2;
                         Position kingDest = new Position(from.Row, destCol);
 
-                        // 2. CHECK SAFETY: Is the King's entire travel path safe?
-                        // We check every square from [Start] to [Destination]
+                        // Checking if the King pass to castling possition is safe
+                        // (could not be attaked by any enemy piece)
                         if (IsPathSafe(from, kingDest, board, opponent))
                         {
-                            // Pass the rook's current position to the move so it knows which rook to grab
                             yield return new CastlingMove(from, kingDest, currentPos);
-                            // Whether it was a valid rook or a blocking pawn, we stop scanning this direction.
                             break;
                         }
-                    }   
+                    }
+                    break;
                 }
             }
         }

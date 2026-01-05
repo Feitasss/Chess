@@ -23,10 +23,10 @@ namespace Chess.Core
 
         public override void Execute(Board board)
         {
-            // 1. Moving the King
+            // Moving the King
             base.Execute(board);
 
-            // 2. Moving the Rook
+            // Moving the Rook
             Piece rook = board[rookFrom];
 
             board[rookFrom] = null;

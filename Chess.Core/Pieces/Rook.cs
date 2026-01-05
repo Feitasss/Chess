@@ -15,7 +15,7 @@ namespace Chess.Core
 
         public Rook(Player color)
         {
-            Player Color = color;
+            Color = color;
         }
 
         public override Piece Copy()

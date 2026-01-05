@@ -101,14 +101,24 @@ namespace Chess.Core
             {
                 for (int c = 0; c < 8; c++)
                 {
-                    Position attackerPos = new Position(r, c);
-                    Piece piece = this[attackerPos];
+                    Position pos = new Position(r, c);
+                    Piece piece = this[pos];
 
-                    if (piece != null && piece.Color == attacker)
+                    if (piece == null || piece.Color != attacker) continue;
+
+                    if (piece.Type == PieceType.King)
                     {
-                        IEnumerable<Move> moves = piece.GetValidMoves(attackerPos, this);
+                        int deltaRow = Math.Abs(pos.Row - target.Row);
+                        int deltaCol = Math.Abs(pos.Column - target.Column);
 
-                        if (moves.Any(move => move.ToPos == target))
+                        if (deltaRow <= 1 && deltaCol <= 1)
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        if (piece.GetValidMoves(pos, this).Any(m => m.ToPos == target))
                         {
                             return true;
                         }
