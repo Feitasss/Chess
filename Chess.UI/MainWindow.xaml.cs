@@ -23,6 +23,9 @@ namespace Chess.UI
         private Game Game;
         private Position? selectedPos = null;
 
+        private bool flipBoard = false;
+        private bool IsFlipped => flipBoard && Game.CurrentPlayer == Player.Black;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -69,19 +72,32 @@ namespace Chess.UI
 
         private void DrawBoard(Board board)
         {
-            Console.WriteLine(Game.CurrentPlayer);
-
             for (int r = 0; r < 8; r++)
             {
                 for (int c = 0; c < 8; c++)
                 {
-                    Piece piece = board[r, c];
-
-                    ImageSource source = Images.GetImage(piece);
-
                     // 0, 0 -> A1 square on Chess Board
                     // 0, 0 -> A8 square on WPF Grid
-                    pieceImages[7 - r, c].Source = source;
+                    // so for White we should turn rows upside down
+                    // and if we flip Board we should change the order of columns
+                    int uiRow, uiCol;
+
+                    if (IsFlipped)
+                    {
+                        uiRow = r;
+                        uiCol = 7 - c;
+                    }
+                    else
+                    {
+                        uiRow = 7 - r;
+                        uiCol = c;
+                    }
+
+                    Piece piece = board[r, c];
+                    ImageSource source = Images.GetImage(piece);
+
+                    pieceImages[uiRow, uiCol].Source = source;
+                    highlights[uiRow, uiCol].Fill = Brushes.Transparent;
                 }
             }
         }
@@ -93,11 +109,32 @@ namespace Chess.UI
             double squareSize = BoardGrid.ActualWidth / 8;
 
             // Convert to Grid Coordinates (0-7)
-            int row = (int)(point.Y / squareSize);
-            int col = (int)(point.X / squareSize);
+            int uiRow = (int)(point.Y / squareSize);
+            int uiCol = (int)(point.X / squareSize);
 
-            // Convert UI Row to Chess Row
-            Position clickedPos = new Position(7 - row, col);
+            // Convert UI Coordinates to Chess Coordinates
+            int r, c;
+
+            if (IsFlipped)
+            {
+                r = uiRow;
+                c = 7 - uiCol;
+            }
+            else
+            {
+                r = 7 - uiRow;
+                c = uiCol;
+            }
+
+            Position clickedPos;
+            if (Game.CurrentPlayer == Player.White)
+            {
+                clickedPos = new Position(r, c);
+            }
+            else
+            {
+                clickedPos = new Position(r, c);
+            }
 
             if (selectedPos == null)
             {
@@ -154,12 +191,20 @@ namespace Chess.UI
 
             foreach (Move move in moves)
             {
-                // logic coordinates (0 = Bottom) -> ui coordinates (0 = Top)
-                // must flip the row
-                int r = 7 - move.ToPos.Row;
-                int c = move.ToPos.Column;
+                int uiRow, uiCol;
 
-                highlights[r, c].Fill = brush;
+                if (IsFlipped)
+                {
+                    uiRow = move.ToPos.Row;
+                    uiCol = 7 - move.ToPos.Column;
+                }
+                else
+                {
+                    uiRow = 7 - move.ToPos.Row;
+                    uiCol = move.ToPos.Column;
+                }
+
+                highlights[uiRow, uiCol].Fill = brush;
             }
         }
 
