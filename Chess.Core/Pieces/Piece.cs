@@ -16,6 +16,7 @@ namespace Chess.Core
 
         public abstract IEnumerable<Move> GetValidMoves(Position from, Board board);
 
+        // for rook, bishop and queen
         protected IEnumerable<Move> MoveInDirections(Position from, Board board, (int dr, int dc)[] directions)
         {
             foreach (var (dr, dc) in directions)
@@ -43,6 +44,7 @@ namespace Chess.Core
             }
         }
 
+        // for knight and king
         protected IEnumerable<Move> MoveToPositions(Position from, Board board, IEnumerable<Position> potentialTargets)
         {
             foreach (Position to in potentialTargets)

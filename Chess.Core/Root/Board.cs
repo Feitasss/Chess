@@ -74,7 +74,7 @@ namespace Chess.Core
         {
             Position kingPos = GetKingPosition(player);
 
-            return IsAttacked(kingPos, player == Player.White ? Player.Black : Player.White);
+            return IsAttacked(kingPos, (player == Player.White) ? Player.Black : Player.White);
         }
 
         private Position GetKingPosition(Player player)

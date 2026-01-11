@@ -34,15 +34,6 @@ namespace Chess.Core
             return candidates.Where(move => IsMoveLegal(move));
         }
 
-        public void MakeMove(Move move)
-        {
-            move.Execute(Board);
-
-            CurrentPlayer = (CurrentPlayer == Player.White) ? Player.Black : Player.White;
-
-            CheckForGameOver();
-        }
-
         private bool IsMoveLegal(Move move)
         {
             bool legal = true;
@@ -54,6 +45,15 @@ namespace Chess.Core
             move.Undo(Board);
 
             return legal;
+        }
+
+        public void MakeMove(Move move)
+        {
+            move.Execute(Board);
+
+            CurrentPlayer = (CurrentPlayer == Player.White) ? Player.Black : Player.White;
+
+            CheckForGameOver();
         }
 
         private void CheckForGameOver()

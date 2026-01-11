@@ -59,7 +59,6 @@ namespace Chess.Core
                     if (piece == null) continue;
                     if (piece.Type == PieceType.Rook && piece.Color == this.Color && !piece.HasMoved)
                     {
-                        // TODO: should be different check
                         int destCol = (dir == 1) ? 6 : 2;
                         Position kingDest = new Position(from.Row, destCol);
 

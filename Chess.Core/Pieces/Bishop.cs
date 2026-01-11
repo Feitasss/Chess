@@ -11,7 +11,10 @@ namespace Chess.Core
         public override PieceType Type => PieceType.Bishop;
         public override Player Color { get; }
 
-        private static readonly (int r, int c)[] dirs = new (int r, int c)[] { (1, 1), (-1, 1), (-1, -1), (1, -1) };
+        private static readonly (int r, int c)[] dirs = new (int r, int c)[] 
+        {
+            (1, 1), (-1, 1), (-1, -1), (1, -1) 
+        };
 
         public Bishop(Player color)
         {
