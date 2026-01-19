@@ -9,6 +9,7 @@
     <RootNamespace>Chess.Core</RootNamespace>
     <AssemblyName>Chess.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+	<LangVersion>8.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -49,6 +50,7 @@
     <Compile Include="Enums\EndReason.cs" />
     <Compile Include="Enums\Player.cs" />
     <Compile Include="Moves\CastlingMove.cs" />
+    <Compile Include="Moves\EnPassantMove.cs" />
     <Compile Include="Pieces\Bishop.cs" />
     <Compile Include="Enums\PieceType.cs" />
     <Compile Include="Root\Board.cs" />

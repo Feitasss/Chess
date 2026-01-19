@@ -29,7 +29,7 @@ namespace Chess.Core
             (1, 2), (1, -2), (-1, 2), (-1, -2)
         };
 
-        public override IEnumerable<Move> GetValidMoves(Position from, Board board)
+        public override IEnumerable<Move> GetValidMoves(Position from, Board board, Game? state)
         {
             var potentialTargets = offsets.Select(offset =>
                 new Position(from.Row + offset.r, from.Column + offset.c));

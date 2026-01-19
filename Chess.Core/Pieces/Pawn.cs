@@ -26,14 +26,14 @@ namespace Chess.Core
             return copy;
         }
 
-        public override IEnumerable<Move> GetValidMoves(Position from, Board board)
+        public override IEnumerable<Move> GetValidMoves(Position from, Board board, Game state)
         {
             Position oneStep = new Position(from.Row + forwardDir, from.Column);
 
             if (Board.IsInside(oneStep) && board.IsEmpty(oneStep))
             {
                 yield return new Move(from, oneStep);
-
+                // first 2 squares move
                 if (!HasMoved)
                 {
                     Position twoSteps = new Position(from.Row + (2 * forwardDir), from.Column);
@@ -44,6 +44,7 @@ namespace Chess.Core
                 }
             }
             
+            // captures
             int[] captureOffsets = { -1, 1 };
 
             foreach (int offset in captureOffsets)
@@ -58,6 +59,26 @@ namespace Chess.Core
                     {
                         yield return new Move(from, diagTarget);
                     }
+                }
+            }
+
+            // En Passant
+            if (state != null && state.MoveHistory.Count > 0)
+            {
+                Move lastMove = state.MoveHistory.Last();
+                Position lastFrom = lastMove.FromPos;
+                Position lastTo = lastMove.ToPos;
+                Piece lastPiece = lastMove.MovedPiece;
+
+                if (lastPiece.Type == PieceType.Pawn &&
+                    lastPiece.Color != this.Color &&
+                    Math.Abs(lastFrom.Row - lastTo.Row) == 2 &&
+                    from.Row == lastTo.Row &&
+                    Math.Abs(from.Column - lastTo.Column) == 1)
+                {
+                    int direction = (this.Color == Player.White) ? 1 : -1;
+                    Position captureDest = new Position(from.Row +  direction, lastTo.Column);
+                    yield return new EnPassantMove(from, captureDest, lastTo);
                 }
             }
         }

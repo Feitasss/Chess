@@ -10,7 +10,9 @@ namespace Chess.Core
     {
         public Position FromPos { get; }
         public Position ToPos { get; }
-        public Piece CapturedPiece { get; private set; }
+
+        public Piece MovedPiece { get; protected set; }
+        public Piece CapturedPiece { get; protected set; }
 
         private bool wasFirstMove;
 
@@ -24,6 +26,7 @@ namespace Chess.Core
         {
             Piece piece = board[FromPos];
 
+            MovedPiece = piece;
             CapturedPiece = board[ToPos];
             wasFirstMove = !piece.HasMoved;
 

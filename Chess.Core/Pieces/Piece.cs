@@ -14,7 +14,7 @@ namespace Chess.Core
 
         public abstract Piece Copy();
 
-        public abstract IEnumerable<Move> GetValidMoves(Position from, Board board);
+        public abstract IEnumerable<Move> GetValidMoves(Position from, Board board, Game? state = null);
 
         // for rook, bishop and queen
         protected IEnumerable<Move> MoveInDirections(Position from, Board board, (int dr, int dc)[] directions)

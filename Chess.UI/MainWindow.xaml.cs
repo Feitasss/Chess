@@ -23,7 +23,7 @@ namespace Chess.UI
         private Game Game;
         private Position? selectedPos = null;
 
-        private bool flipBoard = false;
+        private bool flipBoard = true;
         private bool IsFlipped => flipBoard && Game.CurrentPlayer == Player.Black;
 
         public MainWindow()

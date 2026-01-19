@@ -10,10 +10,12 @@ namespace Chess.Core
     {
         public Board Board { get; }
         public Player CurrentPlayer { get; private set; }
+        public List<Move> MoveHistory { get; } = new List<Move>();
 
         public Player Winner { get; private set; } = Player.None;
         public EndReason GameOverReason { get; private set; }
         public bool IsGameOver { get; private set; } = false;
+
 
         public Game(Board board, Player player)
         {
@@ -29,7 +31,7 @@ namespace Chess.Core
             }
 
             Piece piece = Board[pos];
-            IEnumerable<Move> candidates = piece.GetValidMoves(pos, Board);
+            IEnumerable<Move> candidates = piece.GetValidMoves(pos, Board, this);
 
             return candidates.Where(move => IsMoveLegal(move));
         }
@@ -49,6 +51,8 @@ namespace Chess.Core
 
         public void MakeMove(Move move)
         {
+            MoveHistory.Add(move);
+
             move.Execute(Board);
 
             CurrentPlayer = (CurrentPlayer == Player.White) ? Player.Black : Player.White;

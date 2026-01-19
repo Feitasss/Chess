@@ -28,7 +28,7 @@ namespace Chess.Core
             return copy;
         }
 
-        public override IEnumerable<Move> GetValidMoves(Position from, Board board)
+        public override IEnumerable<Move> GetValidMoves(Position from, Board board, Game? state)
         {
             return MoveInDirections(from, board, dirs);
         }
