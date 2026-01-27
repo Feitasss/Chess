@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Chess.Core
 {
-    public enum EndReason
+    public class MoveRecord
     {
-        Checkmate,
-        Stalemate,
-        ThreefoldRepetition,
-        InsufficientMaterial,
-        FiftyMoveRule
+        public Position From { get; set; }
+        public Position To { get; set; }
     }
 }

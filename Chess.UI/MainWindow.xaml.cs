@@ -23,12 +23,21 @@ namespace Chess.UI
         private Game Game;
         private Position? selectedPos = null;
 
-        private bool flipBoard = true;
+        private bool flipBoard = false;
         private bool IsFlipped => flipBoard && Game.CurrentPlayer == Player.Black;
+
+        private bool isReplayMode = false;
+        private List<GameRecord> history;
+
+        private List<Move> replayMoves;
+        private int replayCurrentMoveIndex = 0;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            UpdateHistoryList();
+
             InitializeBoard();
 
             Game = new Game(Board.Initial(), Player.White);
@@ -104,6 +113,8 @@ namespace Chess.UI
 
         private void BoardGrid_MouseDown(object sender, MouseEventArgs e)
         {
+            if (isReplayMode) return;  // Block clicks on replay
+
             Point point = e.GetPosition(BoardGrid);
 
             double squareSize = BoardGrid.ActualWidth / 8;
@@ -172,6 +183,11 @@ namespace Chess.UI
 
                 selectedPos = null;
                 HideHighlights();
+
+                if (Game.IsGameOver)
+                {
+                    ShowGameOver();
+                }
             }
             else
             {
@@ -218,5 +234,138 @@ namespace Chess.UI
                 }
             }
         }
+
+        private void ShowGameOver()
+        {
+            WinnerText.Text = $"{Game.Winner} Wins!";
+
+            if (Game.GameOverReason == EndReason.Stalemate ||
+                Game.GameOverReason == EndReason.FiftyMoveRule ||
+                Game.GameOverReason == EndReason.InsufficientMaterial)
+            {
+                WinnerText.Text = "Draw!";
+            }
+
+            ReasonText.Text = $"Reason: {Game.GameOverReason}";
+            GameOverMenu.Visibility = Visibility.Visible;
+
+            SaveGameButton.Visibility = Visibility.Visible;
+        }
+
+        private void SaveGameButton_Click(object sender, EventArgs e)
+        {
+            HistoryManager.SaveGame(Game);
+            UpdateHistoryList();
+
+            SaveGameButton.Visibility = Visibility.Collapsed;
+        }
+        
+        private void DeleteGame_Click(object sender, RoutedEventArgs e)
+        {
+            Button deleteBtn = (Button)sender;
+
+            if (deleteBtn.DataContext is GameRecord gameToDelete)
+            {
+                history.Remove(gameToDelete);
+
+                HistoryManager.SaveHistory(history);
+
+                HistoryList.ItemsSource = null;
+                HistoryList.ItemsSource = history;
+            }
+            //e.Handled = true;
+        }
+
+        private void NewGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReplayControls.Visibility = Visibility.Collapsed;
+            GameOverMenu.Visibility = Visibility.Collapsed;
+
+            HistoryList.SelectedItem = null;
+            isReplayMode = false;
+
+            Game = new Game(Board.Initial(), Player.White);
+            selectedPos = null;
+            HideHighlights();
+
+            DrawBoard(Game.Board);
+        }
+
+        private void HistoryList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (HistoryList.SelectedItem is GameRecord selectedGame)
+            {
+                ReplayControls.Visibility = Visibility.Visible;
+                GameOverMenu.Visibility = Visibility.Collapsed;
+
+                StartReplay(selectedGame);
+            }
+        }
+
+        private void StartReplay(GameRecord record)
+        {
+            isReplayMode = true;
+            GameInfoText.Text = $"Replay: {record.Date.ToShortDateString()} ({record.Winner})";
+
+            Game simState = new Game(Board.Initial(), Player.White);
+            replayMoves = new List<Move>();
+
+            foreach (MoveRecord rec in record.Moves)
+            {
+                Move legalMove = simState.GetLegalMovesFor(rec.From).FirstOrDefault(m => m.ToPos == rec.To);
+
+                if (legalMove != null)
+                {
+                    replayMoves.Add(legalMove);
+                    simState.MakeMove(legalMove);
+                }
+            }
+
+            Game = new Game(Board.Initial(), Player.White);
+            replayCurrentMoveIndex = 0;
+            DrawBoard(Game.Board);
+            HideHighlights();
+        }
+
+        private void ReplayPrevMove_Click(object sender, RoutedEventArgs e)
+        {
+            //if (!isReplayMode) return;
+
+            if (replayCurrentMoveIndex > 0)
+            {
+                replayCurrentMoveIndex--;
+                Move move = replayMoves[replayCurrentMoveIndex];
+
+                move.Undo(Game.Board);
+
+                DrawBoard(Game.Board);
+            }
+        }
+
+        private void ReplayNextMove_Click(Object sender, RoutedEventArgs e)
+        {
+            //if (!isReplayMode) return;
+
+            if (replayCurrentMoveIndex < replayMoves.Count)
+            {
+                Move move = replayMoves[replayCurrentMoveIndex];
+
+                move.Execute(Game.Board);
+                replayCurrentMoveIndex++;
+
+                DrawBoard(Game.Board);
+            }
+        }
+
+        private void UpdateHistoryList()
+        {
+            history = HistoryManager.LoadHistory();
+
+            history.Reverse();
+
+            HistoryList.ItemsSource = null;
+            HistoryList.ItemsSource = history;
+        }
+
     }
 }

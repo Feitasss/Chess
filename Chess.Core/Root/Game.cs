@@ -25,7 +25,7 @@ namespace Chess.Core
 
         public IEnumerable<Move> GetLegalMovesFor(Position pos)
         {
-            if (IsGameOver || Board.IsEmpty(pos) || Board[pos].Color != CurrentPlayer || Board[pos] == null)
+            if (IsGameOver || Board.IsEmpty(pos) || Board[pos].Color != CurrentPlayer)
             {
                 return Enumerable.Empty<Move>();
             }
