@@ -23,6 +23,8 @@ namespace Chess.UI
         private Game Game;
         private Position? selectedPos = null;
 
+        private Move? promotionMove;
+
         private bool flipBoard = false;
         private bool IsFlipped => flipBoard && Game.CurrentPlayer == Player.Black;
 
@@ -111,6 +113,11 @@ namespace Chess.UI
             }
         }
 
+        private void CheckForGameOver()
+        {
+            if (Game.IsGameOver) ShowGameOver();
+        }
+
         private void BoardGrid_MouseDown(object sender, MouseEventArgs e)
         {
             if (isReplayMode) return;  // Block clicks on replay
@@ -137,15 +144,7 @@ namespace Chess.UI
                 c = uiCol;
             }
 
-            Position clickedPos;
-            if (Game.CurrentPlayer == Player.White)
-            {
-                clickedPos = new Position(r, c);
-            }
-            else
-            {
-                clickedPos = new Position(r, c);
-            }
+            Position clickedPos = new Position(r, c);
 
             if (selectedPos == null)
             {
@@ -175,6 +174,14 @@ namespace Chess.UI
             // Is the clicked square in that list?
             Move validMove = moves.FirstOrDefault(m => m.ToPos == targetPos);
 
+            if (validMove is PromotionMove promotion)
+            {
+                promotionMove = promotion;
+
+                PromotionMenu.Visibility = Visibility.Visible;
+                return;
+            }
+
             if (validMove != null)
             {
                 Game.MakeMove(validMove);
@@ -184,10 +191,7 @@ namespace Chess.UI
                 selectedPos = null;
                 HideHighlights();
 
-                if (Game.IsGameOver)
-                {
-                    ShowGameOver();
-                }
+                CheckForGameOver();
             }
             else
             {
@@ -252,6 +256,25 @@ namespace Chess.UI
             SaveGameButton.Visibility = Visibility.Visible;
         }
 
+        private void PromotionButton_Click(object sender, RoutedEventArgs e)
+        {
+            PromotionMenu.Visibility = Visibility.Collapsed;
+
+            string choice = (sender as Button).Tag.ToString();
+            PieceType type = (PieceType)Enum.Parse(typeof(PieceType), choice);
+
+            Move finalMove = new PromotionMove(
+                promotionMove.FromPos,
+                promotionMove.ToPos,
+                type
+            );
+
+            Game.MakeMove(finalMove);
+            DrawBoard(Game.Board);
+
+            CheckForGameOver();
+        }
+
         private void SaveGameButton_Click(object sender, EventArgs e)
         {
             HistoryManager.SaveGame(Game);
@@ -280,6 +303,7 @@ namespace Chess.UI
         {
             ReplayControls.Visibility = Visibility.Collapsed;
             GameOverMenu.Visibility = Visibility.Collapsed;
+            PromotionMenu.Visibility = Visibility.Collapsed;
 
             HistoryList.SelectedItem = null;
             isReplayMode = false;

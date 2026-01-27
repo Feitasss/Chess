@@ -30,18 +30,28 @@ namespace Chess.Core
         {
             Position oneStep = new Position(from.Row + forwardDir, from.Column);
 
+            int promotionRow = (Color == Player.White) ? 7 : 0;
+
             if (Board.IsInside(oneStep) && board.IsEmpty(oneStep))
             {
-                yield return new Move(from, oneStep);
-                // first 2 squares move
-                if (!HasMoved)
+                if (oneStep.Row == promotionRow)
                 {
-                    Position twoSteps = new Position(from.Row + (2 * forwardDir), from.Column);
-                    if (Board.IsInside(twoSteps) && board.IsEmpty(twoSteps))
+                    yield return new PromotionMove(from, oneStep, PieceType.Queen);
+                }
+                else
+                {
+                    yield return new Move(from, oneStep);
+                    // first 2 squares move
+                    if (!HasMoved)
                     {
-                        yield return new Move(from, twoSteps);
+                        Position twoSteps = new Position(from.Row + (2 * forwardDir), from.Column);
+                        if (Board.IsInside(twoSteps) && board.IsEmpty(twoSteps))
+                        {
+                            yield return new Move(from, twoSteps);
+                        }
                     }
                 }
+
             }
             
             // captures
@@ -57,7 +67,14 @@ namespace Chess.Core
 
                     if (piece != null && piece.Color != this.Color)
                     {
-                        yield return new Move(from, diagTarget);
+                        if (diagTarget.Row == promotionRow)
+                        {
+                            yield return new PromotionMove(from, diagTarget, PieceType.Queen);
+                        }
+                        else
+                        {
+                            yield return new Move(from, diagTarget);
+                        }
                     }
                 }
             }

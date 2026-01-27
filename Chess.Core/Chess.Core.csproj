@@ -57,6 +57,7 @@
     <Compile Include="History\MoveRecord.cs" />
     <Compile Include="Moves\CastlingMove.cs" />
     <Compile Include="Moves\EnPassantMove.cs" />
+    <Compile Include="Moves\PromotionMove.cs" />
     <Compile Include="Pieces\Bishop.cs" />
     <Compile Include="Enums\PieceType.cs" />
     <Compile Include="Root\Board.cs" />
