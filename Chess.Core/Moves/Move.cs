@@ -24,29 +24,24 @@ namespace Chess.Core
 
         public virtual void Execute(Board board)
         {
-            Piece piece = board[FromPos];
-
-            MovedPiece = piece;
+            MovedPiece = board[FromPos];
             CapturedPiece = board[ToPos];
-            wasFirstMove = !piece.HasMoved;
+            wasFirstMove = !MovedPiece.HasMoved;
 
-            board[ToPos] = piece;
+            board[ToPos] = MovedPiece;
             board[FromPos] = null;
 
-            piece.HasMoved = true;
+            MovedPiece.HasMoved = true;
         }
 
         public virtual void Undo(Board board)
         {
-            Piece piece = board[ToPos];
-
-            board[FromPos] = piece;
-
+            board[FromPos] = MovedPiece;
             board[ToPos] = CapturedPiece;
 
             if (wasFirstMove)
             {
-                piece.HasMoved = false;
+                MovedPiece.HasMoved = false;
             }
         }
     }

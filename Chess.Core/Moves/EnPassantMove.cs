@@ -23,5 +23,12 @@ namespace Chess.Core
             this.CapturedPiece = board[CapturePos];
             board[CapturePos] = null;
         }
+
+        public override void Undo(Board board)
+        {
+            board[FromPos] = MovedPiece;
+            board[ToPos] = null;
+            board[CapturePos] = CapturedPiece;
+        }
     }
 }

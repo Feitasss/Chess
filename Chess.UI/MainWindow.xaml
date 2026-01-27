@@ -16,6 +16,7 @@
                 <Button Grid.Row="0"
                     Content="NEW GAME" 
                     Click="NewGameButton_Click"
+
                     Height="40"
                     FontSize="16"
                     FontWeight="Bold"

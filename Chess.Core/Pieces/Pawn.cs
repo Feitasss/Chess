@@ -93,8 +93,7 @@ namespace Chess.Core
                     from.Row == lastTo.Row &&
                     Math.Abs(from.Column - lastTo.Column) == 1)
                 {
-                    int direction = (this.Color == Player.White) ? 1 : -1;
-                    Position captureDest = new Position(from.Row +  direction, lastTo.Column);
+                    Position captureDest = new Position(from.Row + forwardDir, lastTo.Column);
                     yield return new EnPassantMove(from, captureDest, lastTo);
                 }
             }

@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Chess.Core.Bishop" Collapsed="true">
+    <Position X="7" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Bishop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.King" Collapsed="true">
+    <Position X="13.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAABAgAAAEAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\King.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Knight" Collapsed="true">
+    <Position X="16" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAABAgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Knight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Pawn" Collapsed="true">
+    <Position X="9.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Pawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Piece" Collapsed="true">
+    <Position X="12.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQABAAAAAAAAAAAAAAAAAAAAEgAAQAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Piece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Queen" Collapsed="true">
+    <Position X="18.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Queen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Rook" Collapsed="true">
+    <Position X="11.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AUAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Pieces\Rook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Board" Collapsed="true">
+    <Position X="7" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EABAAAAIAAAAAAAACIAQAEQAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Root\Board.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Game" Collapsed="true">
+    <Position X="9" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAACAAAAAAAAAAgAAIAAAgCCCwAA=</HashCode>
+      <FileName>Root\Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.CastlingMove" Collapsed="true">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABASAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Moves\CastlingMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.EnPassantMove" Collapsed="true">
+    <Position X="16" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Moves\EnPassantMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.Move" Collapsed="true">
+    <Position X="16" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAAAAAAAAAAAAAAAAIQEAAAAAKAA=</HashCode>
+      <FileName>Moves\Move.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.PromotionMove" Collapsed="true">
+    <Position X="18.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAAIAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Moves\PromotionMove.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.GameRecord" Collapsed="true">
+    <Position X="8.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAACAAAAAAAAAAEABAAAAAAAAAAA=</HashCode>
+      <FileName>History\GameRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.HistoryManager" Collapsed="true">
+    <Position X="7" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAABAAAACAAA=</HashCode>
+      <FileName>History\HistoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chess.Core.MoveRecord" Collapsed="true">
+    <Position X="10.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>History\MoveRecord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Chess.Core.Position" Collapsed="true">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgABAAAAAAAAAAgAAAAAAAAAAAiA=</HashCode>
+      <FileName>Root\Position.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Chess.Core.EndReason" Collapsed="true">
+    <Position X="15" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAEAAAACAAAAAAAAAAgAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Enums\EndReason.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Chess.Core.PieceType" Collapsed="true">
+    <Position X="16.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAEggAAAAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\PieceType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Chess.Core.Player" Collapsed="true">
+    <Position X="18.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Enums\Player.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
