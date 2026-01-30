@@ -12,8 +12,6 @@ namespace Chess.Core
         public abstract Player Color { get; }
         public bool HasMoved { get; set; } = false;
 
-        public abstract Piece Copy();
-
         public abstract IEnumerable<Move> GetValidMoves(Position from, Board board, Game? state = null);
 
         // for rook, bishop and queen
@@ -45,10 +43,11 @@ namespace Chess.Core
         }
 
         // for knight and king
-        protected IEnumerable<Move> MoveToPositions(Position from, Board board, IEnumerable<Position> potentialTargets)
+        protected IEnumerable<Move> MoveToPositions(Position from, Board board, (int r, int c)[] offsets)
         {
-            foreach (Position to in potentialTargets)
+            foreach (var (r, c) in offsets)
             {
+                Position to = new Position(from.Row + r, from.Column + c);
                 if (!Board.IsInside(to))
                     continue;
 

@@ -16,13 +16,6 @@ namespace Chess.Core
             Color = color;
         }
 
-        public override Piece Copy()
-        {
-            Knight copy = new Knight(Color);
-            copy.HasMoved = this.HasMoved;
-            return copy;
-        }
-
         private static readonly (int r, int c)[] offsets = new (int r, int c)[]
         {
             (2, 1), (2, -1), (-2, 1), (-2, -1),
@@ -31,10 +24,7 @@ namespace Chess.Core
 
         public override IEnumerable<Move> GetValidMoves(Position from, Board board, Game? state)
         {
-            var potentialTargets = offsets.Select(offset =>
-                new Position(from.Row + offset.r, from.Column + offset.c));
-
-            return MoveToPositions(from, board, potentialTargets);
+            return MoveToPositions(from, board, offsets);
         }
     }
 }

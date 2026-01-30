@@ -16,13 +16,6 @@ namespace Chess.Core
             Color = color;
         }
 
-        public override Piece Copy()
-        {
-            King copy = new King(Color);
-            copy.HasMoved = this.HasMoved;
-            return copy;
-        }
-
         private static readonly (int r, int c)[] offsets = new (int r, int c)[]
         {
             (1, 0), (1, 1), (0, 1), (-1, 1),
@@ -31,10 +24,7 @@ namespace Chess.Core
 
         public override IEnumerable<Move> GetValidMoves(Position from, Board board, Game? state)
         {
-            var potentialTargets = offsets.Select(offset =>
-                new Position(from.Row + offset.r, from.Column + offset.c));
-
-            foreach (var move in MoveToPositions(from, board, potentialTargets))
+            foreach (var move in MoveToPositions(from, board, offsets))
             {
                 yield return move;
             }
@@ -62,7 +52,7 @@ namespace Chess.Core
                         int destCol = (dir == 1) ? 6 : 2;
                         Position kingDest = new Position(from.Row, destCol);
 
-                        // Checking if the King pass to castling possition is safe
+                        // Checking if the King path to castling possition is safe
                         // (could not be attaked by any enemy piece)
                         if (IsPathSafe(from, kingDest, board, opponent))
                         {

@@ -19,13 +19,6 @@ namespace Chess.Core
             forwardDir = (color == Player.White) ? 1 : -1;
         }
 
-        public override Piece Copy()
-        {
-            Pawn copy = new Pawn(Color);
-            copy.HasMoved = this.HasMoved;
-            return copy;
-        }
-
         public override IEnumerable<Move> GetValidMoves(Position from, Board board, Game state)
         {
             Position oneStep = new Position(from.Row + forwardDir, from.Column);
@@ -87,6 +80,8 @@ namespace Chess.Core
                 Position lastTo = lastMove.ToPos;
                 Piece lastPiece = lastMove.MovedPiece;
 
+                // if last move was made by Enemy Pawn by 2 squares
+                // near our initial pawn
                 if (lastPiece.Type == PieceType.Pawn &&
                     lastPiece.Color != this.Color &&
                     Math.Abs(lastFrom.Row - lastTo.Row) == 2 &&

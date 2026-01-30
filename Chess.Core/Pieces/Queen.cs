@@ -22,13 +22,6 @@ namespace Chess.Core
             Color = color;
         }
 
-        public override Piece Copy()
-        {
-            Bishop copy = new Bishop(Color);
-            copy.HasMoved = this.HasMoved;
-            return copy;
-        }
-
         public override IEnumerable<Move> GetValidMoves(Position from, Board board, Game? state)
         {
             return MoveInDirections(from, board, dirs);

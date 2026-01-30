@@ -51,7 +51,7 @@ namespace Chess.UI
             var lightColor = Brushes.Wheat;
             var darkColor = Brushes.SaddleBrown;
 
-            // Loop through every row (r) and column (c)
+            // Loop through every row and column
             for (int r = 0; r < 8; r++)
             {
                 for (int c = 0; c < 8; c++)
@@ -122,6 +122,9 @@ namespace Chess.UI
         {
             if (isReplayMode) return;  // Block clicks on replay
 
+            promotionMove = null;
+            PromotionMenu.Visibility = Visibility.Collapsed;
+
             Point point = e.GetPosition(BoardGrid);
 
             double squareSize = BoardGrid.ActualWidth / 8;
@@ -158,6 +161,7 @@ namespace Chess.UI
 
         private void OnSquareSelected(Position pos)
         {
+            
             if (Game.Board.IsEmpty(pos) || Game.Board[pos].Color != Game.CurrentPlayer)
                 return;
 
@@ -373,9 +377,9 @@ namespace Chess.UI
             if (replayCurrentMoveIndex < replayMoves.Count)
             {
                 Move move = replayMoves[replayCurrentMoveIndex];
+                replayCurrentMoveIndex++;
 
                 move.Execute(Game.Board);
-                replayCurrentMoveIndex++;
 
                 DrawBoard(Game.Board);
             }
@@ -391,5 +395,10 @@ namespace Chess.UI
             HistoryList.ItemsSource = history;
         }
 
+        private void FlipBoard_Toggled(object sender, RoutedEventArgs e)
+        {
+            flipBoard = !flipBoard;
+            DrawBoard(Game.Board);
+        }
     }
 }

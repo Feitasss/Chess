@@ -92,6 +92,7 @@ namespace Chess.Core
                     }
                 }
             }
+            // if there is no king on the board
             return new Position(-1, -1);
         }
 
