@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Chess.Core
 {
-    public class HistoryManager
+    public static class HistoryManager
     {
         private const string FilePath = "data/game_history.json";
 

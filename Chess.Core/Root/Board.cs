@@ -12,14 +12,28 @@ namespace Chess.Core
 
         public Piece this[int row, int col]
         {
-            get { return pieces[row, col]; }
-            set { pieces[row, col] = value; }
+            get 
+            {
+                if (!IsInside(new Position(row, col))) return null;
+                return pieces[row, col]; 
+            }
+            set 
+            {
+                if (IsInside(new Position(row, col))) pieces[row, col] = value; 
+            }
         }
 
         public Piece this[Position pos]
         {
-            get { return pieces[pos.Row, pos.Column]; }
-            set { pieces[pos.Row, pos.Column] = value; }
+            get
+            {
+                if (!IsInside(pos)) return null;
+                return pieces[pos.Row, pos.Column];
+            }
+            set 
+            {
+                if (IsInside(pos)) pieces[pos.Row, pos.Column] = value; 
+            }
         }
 
         public static Board Initial()
