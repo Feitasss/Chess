@@ -16,6 +16,7 @@ namespace Chess.Core
         {
             if (!File.Exists(FilePath))
             {
+                Directory.CreateDirectory(Path.GetDirectoryName(FilePath));
                 File.WriteAllText(FilePath, "[]");
                 return new List<GameRecord>();
             }
