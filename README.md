@@ -1,6 +1,6 @@
-# ♟️ Chess — Desktop Chess Application in C# / WPF
+# ♟️ Chess — Cross-Platform Desktop Chess Application in C# / Avalonia UI
 
-A fully functional two-player chess desktop application built with **C#** and **WPF (.NET 8)**, implementing the complete official FIDE ruleset. The project is structured into two clean layers: a standalone chess engine (`Chess.Core`) and a WPF graphical front-end (`Chess.UI`).
+A fully functional two-player chess desktop application built with **C#** and **Avalonia UI (.NET)**, implementing the complete official FIDE ruleset, running natively on both **Windows** and **Linux**. The project is structured into two clean layers: a standalone chess engine (`Chess.Core`) and an Avalonia graphical front-end (`Chess.Avalonia`).
 
 ---
 
@@ -38,7 +38,7 @@ A fully functional two-player chess desktop application built with **C#** and **
 - ✅ Stalemate
 
 ### UI & UX
-- ✅ Interactive WPF board — click to select and move pieces
+- ✅ Interactive Avalonia board — click to select and move pieces
 - ✅ Board flip (swap White/Black perspective)
 - ✅ Pawn promotion dialog
 - ✅ Game-over screen with result display
@@ -71,9 +71,9 @@ Chess/
 │   ├── MoveRecord.cs   # DTO: From / To coordinates for history storage
 │   └── Enums/          # Player, PieceType, EndReason
 │
-└── Chess.UI/           # WPF front-end
-    ├── MainWindow.xaml / .cs  # Board rendering, mouse events, side panel, dialogs
-    └── Images.cs       # Static class: loads piece images into WPF ImageSource objects
+└── Chess.Avalonia/     # Avalonia UI front-end (Windows + Linux)
+    ├── MainWindow.axaml / .cs  # Board rendering, pointer events, side panel, dialogs
+    └── Images/Images.cs       # Static class: loads piece images into Avalonia Bitmap objects
 ```
 
 ### Key Design Decisions
@@ -82,31 +82,39 @@ Chess/
 
 **C# generators for move generation** — `GetValidMoves` uses `yield return` (lazy `IEnumerable<Move>`), so the engine only computes moves as they're needed. This reduces memory usage and allows early-exit when, for example, searching for any move that escapes check.
 
-**Strict separation of Core and UI** — `Chess.Core` has zero WPF dependencies and can be tested or reused independently (e.g. for a future AI or web front-end).
+**Strict separation of Core and UI** — `Chess.Core` has zero UI-framework dependencies and can be tested or reused independently (e.g. for a future AI or web front-end).
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Windows** 7 SP1 / 8.1 / 10 / 11
-- [**.NET 8.0 Runtime**](https://dotnet.microsoft.com/download/dotnet/8.0) (Desktop)
-- [**Visual Studio 2022**](https://visualstudio.microsoft.com/) with the *".NET Desktop Development"* workload
+- **Windows** or **Linux**
+- [**.NET SDK**](https://dotnet.microsoft.com/download) matching the version targeted by `Chess.Avalonia.csproj`
 
 ### Run from Source
 
 ```bash
 git clone https://github.com/Feitasss/Chess.git
 cd Chess
+dotnet run --project Chess.Avalonia/Chess.Avalonia.csproj
 ```
 
-Open `Chess.sln` in Visual Studio, set `Chess.UI` as the startup project, and press **F5**.
+Alternatively, open `Chess.sln` in your IDE of choice (Visual Studio, Rider, VS Code), set `Chess.Avalonia` as the startup project, and run.
+
+### Publishing a standalone binary
+
+```bash
+dotnet publish Chess.Avalonia/Chess.Avalonia.csproj -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
+```
+
+Swap `linux-x64` for `win-x64` to target Windows. Output lands in `Chess.Avalonia/bin/Release/<tfm>/<rid>/publish/`.
 
 ### System Requirements
 
 | Component       | Minimum                              |
 |-----------------|--------------------------------------|
-| OS              | Windows 7 SP1 or newer               |
+| OS              | Windows 10+ or a modern Linux distro |
 | CPU             | 1 GHz                                |
 | RAM             | 512 MB                               |
 | Disk            | ~50 MB                               |
@@ -118,10 +126,10 @@ Open `Chess.sln` in Visual Studio, set `Chess.UI` as the startup project, and pr
 
 | Layer       | Technology                         |
 |-------------|-------------------------------------|
-| Language    | C# (.NET 8)                        |
-| UI          | Windows Presentation Foundation (WPF) + XAML |
+| Language    | C# (.NET)                          |
+| UI          | Avalonia UI + AXAML                |
 | Persistence | Newtonsoft.Json (JSON file)        |
-| Build       | Visual Studio 2022                 |
+| Build       | dotnet CLI / Visual Studio / Rider |
 | VCS         | Git / GitHub                       |
 
 ---
@@ -141,7 +149,7 @@ Open `Chess.sln` in Visual Studio, set `Chess.UI` as the startup project, and pr
 
 **[Feitasss](https://github.com/Feitasss)**  
 Computer Science student — UITM in Rzeszów  
-Skills: C#, Python, WPF, .NET, SQL, Git
+Skills: C#, Python, Avalonia UI, .NET, SQL, Git
 
 ---
 

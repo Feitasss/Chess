@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# App runtime data (saved game history, generated on first run)
+/data/
+
 # User-specific files
 *.rsuser
 *.suo
